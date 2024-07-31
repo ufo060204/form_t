@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* html {
+  scroll-behavior: smooth; // 平滑滾動效果
+} */
+
+@layer components {
+  .contact__content {
+    @apply grid grid-cols-1 lg:grid-cols-[64%_auto];
+  }
+  .contact__main {
+    @apply mt-[72px] lg:mt-0;
+  }
+  .contact__title {
+    @apply text-5xl lg:text-11xl font-bold px-4 lg:px-12 py-7.5 lg:py-9;
+    color: var(--contact__title-color);
+    background-color: var(--contact__title-bg);
+  }
+  .contact__title--linear {
+    @apply text-5xl lg:text-11xl font-bold px-4 lg:px-12 py-7.5 lg:py-9;
+    color: var(--contact__title-color);
+    background: linear-gradient(to right, var(--partner__card--dark-bg--l) 0, var(--partner__card--dark-bg--l) 95%, var(--partner__card--dark-bg--r) 95%, var(--partner__card--dark-bg--r) 100%);
+  }
+  .contact__reply {
+    @apply flex-col justify-between items-center transition-all duration-500 ease-in-out delay-200 px-4 lg:px-17 py-7.5;
+  }
+  .contact__reply-intro {
+    @apply w-full h-full transition-all duration-500 ease-in-out delay-200
+  }
+  .contact__reply-intro img {
+    @apply mx-auto w-1/2 lg:w-[35%];
+  }
+  .contact__intro {
+    @apply flex-col justify-center items-start;
+  }
+  .contact__intro-title {
+    /* @apply text-3xl md:text-4xl xl:text-7xl font-semibold text-green-500 mb-4; */
+    @apply text-3xl md:text-4xl xl:text-7xl font-semibold  mb-4;
+  }
+  .contact__intro-subtitle {
+    @apply text-xl md:text-2xl xl:text-3xl mb-4;
+  }
+  .contact__intro-text {
+    @apply text-lg md:text-xl xl:text-2xl mx-auto;
+  }
+  .contact__form {
+    @apply flex flex-col justify-start items-stretch gap-y-8 px-4 lg:px-17 py-7.5 w-full;
+  }
+  .contact__form-label {
+    @apply text-lg mb-4;
+  }
+  .contact__form-label--highlight {
+    color: var(--primary-200);
+  }
+  .contact__form-text {
+    @apply mb-4 text-lg;
+  }
+  .contact__form-text--light {
+    @apply mb-6 text-lg font-light;
+  }
+  .contact__form-group--radio {
+    @apply flex items-center gap-x-2 text-lg;
+  }
+  .contact__input--radio {
+    @apply w-5 h-5;
+  }
+  .contact__form-group--checkbox {
+    @apply flex items-center gap-x-2 text-lg;
+  }
+  .contact__input--checkbox {
+    @apply w-5 h-5;
+  }
+  .contact__input--text {
+    @apply block w-full lg:w-[65%] p-2;
+    /* border: 2px solid transparent; */
+    border: none;
+    background-color: var(--contact__input--text-bg);
+  }
+  /* .contact__input--text::focus-visible{
+    outline: none;
+    border:none;
+  }
+  .contact__input--text::focus{
+    outline: none;
+    border: none;
+  } */
+  .contact__label--text{
+    @apply inline-block mb-1;
+  }
+  .contact__link {
+    @apply block py-4 text-center text-lg rounded-[10px];
+    color: var(--contact__link-color);
+    background-color: var(--contact__link-bg);
+    border: 1px solid var(--contact__link-border);
+  }
+  .contact__submit {
+    @apply rounded-[10px] py-4 mr-auto w-full lg:w-[34%] cursor-pointer;
+    color: var(--contact__submit-color);
+    background-color: var(--contact__submit-bg);
+    border: 1px solid var(--contact__submit-border);
+  }
+  .contact__submit:hover {
+    background-color: var(--contact__submit-hover-bg);
+    color: var(--contact__submit-hover-color);
+  }
+  .contact__aside {
+    @apply inline-block max-h-[330px] px-4 lg:px-12 py-7.5 lg:py-9;
+    color: var(--contact__aside-color);
+    background-color: var(--contact__aside-bg);
+  }
+  .contact__aside-card {
+    @apply px-0 lg:px-5 pt-2.5 lg:pt-5 pb-0 lg:pb-5 flex flex-col gap-y-3;
+  }
+  .contact__aside-title {
+    @apply text-4xl;
+  }
+  .contact__aside-text {
+    @apply text-lg;
+  }
+  /* .error-message {
+    @apply relative max-w-[150px] text-sm text-center p-2 bg-[#DC3545] text-white rounded-[4px] opacity-0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .error-message.show {
+    @apply opacity-100;    
+    transition: opacity 0.3s ease-in-out;
+  } */
+
+  /* 表單錯誤提示樣式 */
+  
+  .checkbox-group + .error-container {
+    @apply w-full lg:w-[80%] pt-2;
+    /* border-top: 1px solid #c0c0c0; */
+    border-top: 1px solid #f15e6c;
+  }
+  .error-container .error {
+    @apply ml-2;
+    color: #f15e6c;
+  }
+  .error-container.show {
+    @apply flex;
+  }
+  .checkbox-group.input-error {
+    box-shadow: none;
+    border: none;
+  }
+  .radio-group.input-error {
+    box-shadow: none;
+    border: none;
+  }
+  .input-error {
+    /* border-bottom: 1px solid #e91429; */
+    box-shadow: inset 0 0 0 1px #e91429;
+    border-radius: 4px;
+  }
+  /* 基本的焦點樣式 */
+  .input-error:focus {
+    /* outline: 1px solid #e91429; */
+    border: none;
+    outline: none;
+    box-shadow: inset 0 0 0 1.5px #e91429;
+  }
+  /* 當元素有焦點但不需要顯示視覺提示時的樣式 */
+  .input-error:focus:not(:focus-visible) {
+    outline: none;
+  }
+  /* 為鍵盤用戶提供清晰的視覺提示 */
+  .input-error:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 1.5px #e91429;
+    /* outline: 2px solid #e91429;
+    box-shadow: 0 0 0 2px rgba(233, 20, 41, 0.3); */
+  }
+}
+.input-error + .error-container {
+    @apply flex items-center mt-2 text-sm;
+  }

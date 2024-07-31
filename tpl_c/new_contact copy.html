@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>new_contact</title>
+  <link href="./css/all.css" rel="stylesheet">
+
+
+
+
+</head>
+<body>
+  <div class="container 2xl:px-32">
+    <div class="contact__content">
+      <div class="contact__main">
+        <h1 id="contact__title" class="contact__title">診所合作聯繫</h1>
+        <div id="Reply" class="hidden contact__reply">
+          <div id="ReplySuccess" class="hidden contact__intro">
+            <p class="contact__intro-title">台灣區廣告代理伙伴會盡速聯繫您！</p>
+            <span class="contact__intro-subtitle">Our Taiwan advertising partner will respond soon！</span>
+            <!-- <p class="contact__intro-text">即將在 <span id="countdown" class="countdown">3</span> 秒後回到上一頁</p> -->
+            <p class="contact__intro-text">即將在 <span class="countdown"></span> 秒後回到上一頁</p>
+          </div>
+          <div id="ReplyError" class="hidden contact__intro">
+            <p class="contact__intro-title">您的表單沒有送出，請您重新操作一次</p>
+            <span class="contact__intro-subtitle">Your form did not sent to us. Please fill it again.</span>
+          </div>
+          <figure id="ReplyIntro" class="contact__reply-intro">
+            <picture>
+              <source media="(min-width: 1024px)" srcset="https://www.best-doctor.com.tw/dist/images/contact/tit_pic02_PC.jpg">
+              <img src="https://www.best-doctor.com.tw/dist/images/contact/tit_pic02_PC.jpg" alt="台灣區廣告代理伙伴會盡速聯繫您" />
+            </picture>
+          </figure>
+        </div>
+        <form class="contact__form" name="bestdoctorContact" id="bestdoctorContact" method="POST"
+          action="http://localhost:9000/api/contact">
+          <div class="flex flex-col">
+            <p class="contact__form-text">
+              歡迎您留下聯絡資訊，有關本站的診所合作NP服務內容與方案，
+              <br class="hidden lg:block">
+              台灣各地區的業務代理商將盡快與您聯繫
+            </p>
+            <p class="contact__form-text--light">
+              Your message will be sent to our Taiwan agency partners,
+              <br class="hidden lg:block">
+              who will get back to you as soon as they can.
+            </p>
+            <label class="contact__form-label">請勾選希望了解事項<span class="contact__form-text--light ml-1">How may we help you?
+                (複選 multi choice)</span></label>
+  
+            <!-- checkbox -->
+            <div class="grid grid-cols-1 gap-2">
+              <div class="contact__form-group--checkbox">
+                <input class="contact__input--checkbox" type="checkbox" name="contact_services[]" value="診所每月NP成長策略"
+                  id="attractingNewPatients">
+                <label for="attractingNewPatients">診所每月NP成長策略<span class="ml-1 font-light">Attracting New
+                    Patients</span></label>
+              </div>
+              <div class="contact__form-group--checkbox">
+                <input class="contact__input--checkbox" type="checkbox" name="contact_services[]" value="診所經營之諮詢服務"
+                  id="dentalOfficeSolutions">
+                <label for="dentalOfficeSolutions">診所經營之諮詢服務<span class="ml-1 font-light">Dental Office
+                    Solutions</span></label>
+              </div>
+              <div class="contact__form-group--checkbox">
+                <input class="contact__input--checkbox" type="checkbox" name="contact_services[]" value="取得產業市場趨勢情報"
+                  id="dentistryTrendAnalysis">
+                <label for="dentistryTrendAnalysis">取得產業市場趨勢情報<span class="ml-1 font-light">Dentistry Trend
+                    Analysis</span></label>
+              </div>
+              <div class="contact__form-group--checkbox">
+                <input class="contact__input--checkbox" type="checkbox" name="contact_services[]" value="醫師個人經營之建議"
+                  id="dentistMarketingConsultation">
+                <label for="dentistMarketingConsultation">醫師個人經營之建議<span class="ml-1 font-light">Dentist Marketing
+                    Consultation</span></label>
+              </div>
+              <div class="contact__form-group--checkbox">
+                <input class="contact__input--checkbox" type="checkbox" name="contact_services[]" value="索取牙醫病患每季分析"
+                  id="dentalPatientQuarterly">
+                <label class="contact__form-label--highlight" for="dentalPatientQuarterly">索取牙醫病患每季分析<span
+                    class="ml-1 font-light">Dental Patient Quarterly</span></label>
+              </div>
+              <span class="error-message" id="error-message">請至少選擇一個項目</span>
+            </div>
+  
+          </div>
+          <div class="grid grid-cols-1 gap-4">
+            <div class="text-lg">
+              <label class="contact__label--text" for="company">診所名稱<span class="ml-1 font-light">Company</span></label>
+              <input class="contact__input--text" type="text" id="company" name="contact_company" placeholder="診所名稱" value="test" data-validation="required">
+              <div>
+                <svg data-encore-id="icon" role="img" aria-label="Error:" aria-hidden="true" width="16px" class="icon-error" viewBox="0 0 16 16">
+                  <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path>
+                  <path d="M7.25 9V4h1.5v5h-1.5zm0 3.026v-1.5h1.5v1.5h-1.5z"></path>
+                </svg>
+                <span class="error"></span>
+              </div>
+            </div>
+            <div class="text-lg">
+              <label class="contact__label--text" for="companyPhone">診所電話<span class="ml-1 font-light">Company
+                  Phone</span></label>
+              <input class="contact__input--text" type="tel" id="companyPhone" name="contact_company_phone" placeholder="診所電話"
+                pattern="[0-9]*" inputmode="tel" required value="23456789">
+            </div>
+            <div class="text-lg">
+              <label class="contact__label--text" for="yourName">聯絡大名<span class="ml-1 font-light">Your
+                  Name</span></label>
+              <input class="contact__input--text" type="text" id="yourName" name="contact_your_name" placeholder="聯絡大名" required
+                value="test">
+            </div>
+            <div class="text-lg">
+              <label class="contact__label--text" for="yourTitle">聯絡職稱<span class="ml-1 font-light">Your
+                  Title</span></label>
+              <input class="contact__input--text" type="text" id="yourTitle" name="contact_your_title" placeholder="聯絡職稱" required
+                value="test">
+            </div>
+            <div class="text-lg">
+              <label class="contact__label--text" for="yourCellPhone">聯絡手機<span class="ml-1 font-light">Your Cell
+                  Phone</span></label>
+              <input class="contact__input--text" type="tel" id="yourCellPhone" name="contact_your_cellPhone" placeholder="聯絡手機"
+                pattern="[0-9]*" inputmode="tel" required value="0912345678">
+            </div>
+            <div class="text-lg">
+              <label class="contact__label--text" for="yourEmail">聯絡郵箱<span class="ml-1 font-light">Your
+                  Email</span></label>
+              <input class="contact__input--text" type="email" id="yourEmail" name="contact_your_email" placeholder="聯絡郵箱"
+                inputmode="email" required value="test@gmail.com">
+            </div>
+          </div>
+          <div class="text-lg">
+            <label class="contact__label--text" for="message">補充敘述<br class="lg:hidden block"><span
+                class="ml-0 lg:ml-1 font-light">Message (非必填 Optional)</span></label>
+            <textarea class="contact__input--text" id="Message" name="Message" rows="6" cols="100" maxlength="200"
+              placeholder="補充敘述......"></textarea>
+          </div>
+          <input type="text" name="antispam" value="zkgbff93j573f4ewd4g5g54qnsbfqe36">
+          <div class="w-full flex flex-col justify-center items-center">
+            <input class="contact__submit" type="submit">
+          </div>
+        </form>
+      </div>
+      <div class="contact__aside">
+        <p class="contact__aside-title">如果您是......</p>
+        <div class="contact__aside-card">
+          <p class="contact__aside-text">
+            醫材設備商
+            <br>
+            Medical Equipment Idustry
+          </p>
+          <p class="contact__aside-text">
+            消費性產品
+            <br>
+            Consumer Product Industry
+          </p>
+          <a href="new_contact_brand.html" class="contact__link">請按這裡</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <script src="new_dentist.js"></script> -->
+  <!-- <script src="new_dentist_old.js"></script> -->
+  <script src="new_dentist_test_2.js"></script>
+</body>
+</html>
