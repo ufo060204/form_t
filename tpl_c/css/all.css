@@ -833,32 +833,6 @@ video {
     @apply opacity-100;    
     transition: opacity 0.3s ease-in-out;
   } */
-/* 表單錯誤提示樣式 */
-.checkbox-group + .error-container {
-  width: 100%;
-  padding-top: 0.5rem;
-}
-@media (min-width: 1024px) {
-
-  .checkbox-group + .error-container {
-    width: 80%;
-  }
-}
-.checkbox-group + .error-container {
-    /* border-top: 1px solid #c0c0c0; */
-    border-top: 1px solid #f15e6c;
-  }
-.error-container .error {
-  margin-left: 0.5rem;
-    color: #f15e6c;
-}
-.checkbox-group.input-error {
-    box-shadow: none;
-    border: none;
-  }
-/* 基本的焦點樣式 */
-/* 當元素有焦點但不需要顯示視覺提示時的樣式 */
-/* 為鍵盤用戶提供清晰的視覺提示 */
 .ml-0 {
   margin-left: 0px;
 }
@@ -925,11 +899,64 @@ video {
 /* html {
   scroll-behavior: smooth; // 平滑滾動效果
 } */
+/* 表單錯誤提示樣式 */
 .input-error + .error-container {
   margin-top: 0.5rem;
   display: flex;
   align-items: center;
   font-size: 0.875rem;
+}
+.checkbox-group + .error-container {
+  width: 100%;
+  padding-top: 0.5rem;
+}
+@media (min-width: 1024px) {
+
+  .checkbox-group + .error-container {
+    width: 80%;
+  }
+}
+.checkbox-group + .error-container {
+  /* border-top: 1px solid #c0c0c0; */
+  border-top: 1px solid #f15e6c;
+}
+.error-container .error {
+  margin-left: 0.5rem;
+  color: #f15e6c;
+}
+.error-container.show {
+  display: flex;
+}
+.checkbox-group.input-error {
+  box-shadow: none;
+  border: none;
+}
+.radio-group.input-error {
+  box-shadow: none;
+  border: none;
+}
+.input-error {
+  /* border-bottom: 1px solid #e91429; */
+  box-shadow: inset 0 0 0 1px #e91429;
+  border-radius: 4px;
+}
+/* 基本的焦點樣式 */
+.input-error:focus {
+  /* outline: 1px solid #e91429; */
+  border: none;
+  outline: none;
+  box-shadow: inset 0 0 0 1.5px #e91429;
+}
+/* 當元素有焦點但不需要顯示視覺提示時的樣式 */
+.input-error:focus:not(:focus-visible) {
+  outline: none;
+}
+/* 為鍵盤用戶提供清晰的視覺提示 */
+.input-error:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1.5px #e91429;
+  /* outline: 2px solid #e91429;
+  box-shadow: 0 0 0 2px rgba(233, 20, 41, 0.3); */
 }
 @media (min-width: 1024px) {
 
