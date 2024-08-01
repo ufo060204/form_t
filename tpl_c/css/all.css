@@ -730,8 +730,7 @@ video {
   }
 }
 .contact__input--text {
-    /* border: 2px solid transparent; */
-    border: none;
+    border: 1px solid transparent;
     background-color: var(--contact__input--text-bg);
   }
 /* .contact__input--text::focus-visible{
@@ -930,31 +929,36 @@ video {
 .checkbox-group.input-error {
   box-shadow: none;
   border: none;
+  outline: none;
 }
 .radio-group.input-error {
   box-shadow: none;
   border: none;
+  outline: none;
 }
 .input-error {
-  /* border-bottom: 1px solid #e91429; */
-  box-shadow: inset 0 0 0 1px #e91429;
+  border-bottom: 1px solid #e91429;
+  /* box-shadow: inset 0 0 0 1px #e91429; */
+  /* outline: 1px solid #e91429; */
   border-radius: 4px;
 }
 /* 基本的焦點樣式 */
 .input-error:focus {
   /* outline: 1px solid #e91429; */
-  border: none;
+  border: 1px solid #e91429;
   outline: none;
-  box-shadow: inset 0 0 0 1.5px #e91429;
+  /* box-shadow: inset 0 0 0 1.5px #e91429; */
+  /* outline: 1px solid #e91429; */
 }
 /* 當元素有焦點但不需要顯示視覺提示時的樣式 */
-.input-error:focus:not(:focus-visible) {
+/* .input-error:focus:not(:focus-visible) {
   outline: none;
-}
+} */
 /* 為鍵盤用戶提供清晰的視覺提示 */
 .input-error:focus-visible {
+  border: 1px solid #e91429;
   outline: none;
-  box-shadow: inset 0 0 0 1.5px #e91429;
+  /* box-shadow: inset 0 0 0 1.5px #e91429; */
   /* outline: 2px solid #e91429;
   box-shadow: 0 0 0 2px rgba(233, 20, 41, 0.3); */
 }

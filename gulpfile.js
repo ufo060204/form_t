@@ -1,25 +1,25 @@
-const gulp = require("gulp"); // 載入 gulp
-const concat = require("gulp-concat"); // 合併文件
-const browserSync = require("browser-sync").create(); // 瀏覽器同步
-const cleanCSS = require("gulp-clean-css"); // 壓縮 css
-const del = require("del"); // 刪除文件
-const connect = require("gulp-connect"); // 本地服務器
-const jshint = require("gulp-jshint"); // 檢查 js
-const babel = require("gulp-babel"); // 轉換 ES6
-const uglify = require("gulp-uglify"); // 壓縮 js
-const gulpif = require("gulp-if"); // 條件判斷
-const useref = require("gulp-useref"); // 合併檔案
-// const replace = require("gulp-replace"); // 替換 dist 路徑
-const webpack = require("webpack-stream"); // webpack 打包
-const webpackConfig = require("./webpack.config.js"); // 導入 Webpack 配置
-const nested = require("postcss-nested"); // scss 轉換
+var gulp = require("gulp"); // 載入 gulp
+var concat = require("gulp-concat"); // 合併文件
+var browserSync = require("browser-sync").create(); // 瀏覽器同步
+var cleanCSS = require("gulp-clean-css"); // 壓縮 css
+var del = require("del"); // 刪除文件
+var connect = require("gulp-connect"); // 本地服務器
+var jshint = require("gulp-jshint"); // 檢查 js
+var babel = require("gulp-babel"); // 轉換 ES6
+var uglify = require("gulp-uglify"); // 壓縮 js
+var gulpif = require("gulp-if"); // 條件判斷
+var useref = require("gulp-useref"); // 合併檔案
+// var replace = require("gulp-replace"); // 替換 dist 路徑
+var webpack = require("webpack-stream"); // webpack 打包
+var webpackConfig = require("./webpack.config.js"); // 導入 Webpack 配置
+var nested = require("postcss-nested"); // scss 轉換
 
-const autoprefixer = require("autoprefixer");
-const sourcemaps = require("gulp-sourcemaps");
-const postcss = require("gulp-postcss");
-const tailwindcss = require("tailwindcss");
+var autoprefixer = require("autoprefixer");
+var sourcemaps = require("gulp-sourcemaps");
+var postcss = require("gulp-postcss");
+var tailwindcss = require("tailwindcss");
 
-const tailwindConfig = {
+var tailwindConfig = {
   default: { config: "tailwind.config.cjs" },
   newDentist: { config: "tpl/js/new_dentist/new_dentist_tailwind_config.cjs" },
 };
@@ -75,24 +75,50 @@ function createCleanTask(taskName, srcFiles) {
   });
 }
 
-function createConnectTask(taskName, baseDir, indexPage = "new_index.html") {
+function createConnectTask(taskName, baseDir, indexPage = "index.html") {
   return gulp.task(taskName, function (cb) {
-    browserSync.init({
-      server: {
-        // 資源存取的來源資料夾，相對於 baseDir
-        baseDir: baseDir,
-        index: indexPage,
-        routes: {
-          "/images": "./images",
-          "/css": "css",
-          "/assets": "./assets",
-          "/api": "./api",
+    browserSync.init(
+      {
+        server: {
+          baseDir: baseDir,
+          index: indexPage,
+          // routes: {
+          //   "/images": "./images",
+          //   "/css": "css",
+          //   "/assets": "./assets",
+          //   "/api": "./api",
+          // },
         },
       },
-    });
-    cb();
+      function (err, bs) {
+        if (err) {
+          cb(err);
+        } else {
+          cb();
+        }
+      }
+    );
   });
 }
+
+// function createConnectTask(taskName, baseDir, indexPage = "new_index.html") {
+//   return gulp.task(taskName, function (cb) {
+//     browserSync.init({
+//       server: {
+//         // 資源存取的來源資料夾，相對於 baseDir
+//         baseDir: baseDir,
+//         index: indexPage,
+//         routes: {
+//           "/images": "./images",
+//           "/css": "css",
+//           "/assets": "./assets",
+//           "/api": "./api",
+//         },
+//       },
+//     });
+//     cb();
+//   });
+// }
 
 function createWebpackTask(taskName, srcFiles, outputFile) {
   return gulp.task(taskName, function () {
@@ -160,6 +186,12 @@ createJsTask(
     "tpl/js/new_dentist/new_dentist_swiper.js",
   ],
   "new_dentist.js"
+);
+
+createJsTask(
+  "js",
+  ["tpl/js/all.js"],
+  "all.js"
 );
 
 createCssTask(
@@ -243,25 +275,26 @@ createCleanTask("clean:tpl_c", ["tpl_c/**/*"]);
 createCleanTask("clean:dist", ["dist/**/*"]);
 
 createConnectTask("connect:tpl_c", "./tpl_c");
-createConnectTask("connect:index", "./tpl_c", "index.html");
+createConnectTask("connect:index", "./tpl_c");
 createConnectTask("connect:dist", "./dist");
 
 gulp.task("new-watches-dev", function () {
-  gulp.watch("assets/**/js/*.{js, cjs}", gulp.series("new-init"));
-  gulp.watch("assets/**/css/*.css", gulp.series("new-init"));
-  gulp.watch("tpl/*.html", gulp.series("new-init"));
-  gulp.watch("tpl/js/**/*.{js, cjs}", gulp.series("new-init"));
-  gulp.watch("tpl/css/**/*.css", gulp.series("new-init"));
-  gulp.watch(
-    [
-      "tpl/css/variable.css",
-      "tpl/css/variable.dentist.css",
-      "tpl/css/new_dentist/new_dentist_variable.css",
-    ],
-    gulp.series("new-css-variable")
-  );
-  gulp.watch(["images/**/*", "assets/**/images/*"], gulp.series("new-init"));
-  gulp.watch("gulpfile.js", gulp.series("new-init"));
+  // gulp.watch("assets/**/js/*.{js, cjs}", gulp.series("new-init"));
+  // gulp.watch("assets/**/css/*.css", gulp.series("new-init"));
+  gulp.watch("tpl/*.html", gulp.series("dev"));
+  gulp.watch("tpl/js/**/*.{js, cjs}", gulp.series("dev"));
+  // gulp.watch("tpl_c/js/**/*.{js, cjs}", gulp.series("dev"));
+  gulp.watch("tpl/css/**/*.css", gulp.series("dev"));
+  // gulp.watch(
+  //   [
+  //     "tpl/css/variable.css",
+  //     "tpl/css/variable.dentist.css",
+  //     "tpl/css/new_dentist/new_dentist_variable.css",
+  //   ],
+  //   gulp.series("new-css-variable")
+  // );
+  // gulp.watch(["images/**/*", "assets/**/images/*"], gulp.series("new-init"));
+  // gulp.watch("gulpfile.js", gulp.series("dev"));
 });
 
 gulp.task("new-minFs", function () {
@@ -326,4 +359,4 @@ gulp.task(
 );
 gulp.task("new-serve", gulp.series("new-build", "connect:dist"));
 
-gulp.task("dev", gulp.series("new-html", "css", "connect:index"));
+gulp.task("dev", gulp.series("new-html", "css", "js", "connect:index"));

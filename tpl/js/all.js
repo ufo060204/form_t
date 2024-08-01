@@ -1,11 +1,11 @@
 // 工具函數
-const qs = selector => document.querySelector(selector);
-const qsa = selector => document.querySelectorAll(selector);
+const qs = (selector) => document.querySelector(selector);
+const qsa = (selector) => document.querySelectorAll(selector);
 
 // 修改 a 連結標籤 target 屬性
 function modifyLinkTargets() {
   const links = document.querySelectorAll("a");
-  links.forEach(a => {
+  links.forEach((a) => {
     if (a.hasAttribute("target") && !a.hasAttribute("rel")) {
       a.setAttribute("rel", "noreferrer noopener");
     }
@@ -15,7 +15,7 @@ function modifyLinkTargets() {
 function renderStarRatings() {
   const starRatings = document.querySelectorAll(".star-rating");
   if (starRatings) {
-    starRatings.forEach(starRating => {
+    starRatings.forEach((starRating) => {
       const score = parseInt(starRating.getAttribute("data-score"), 10);
       let starsHTML = "";
       for (let i = 0; i < score; i++) {
@@ -62,7 +62,10 @@ function handleCollapseMenuClick(event) {
   const target = event.target;
   if (target.classList.contains("collapse__link")) {
     toggleMenu();
-  } else if (target.classList.contains("collapse__title") && target.tagName.toLowerCase() === "a") {
+  } else if (
+    target.classList.contains("collapse__title") &&
+    target.tagName.toLowerCase() === "a"
+  ) {
     toggleMenu();
   }
 }
@@ -90,9 +93,9 @@ const CONFIG = {
     COUNTDOWN: "#countdown",
     REPLY: "#Reply",
     REPLY_SUCCESS: "#ReplySuccess",
-    REPLY_ERROR: "#ReplyError"
+    REPLY_ERROR: "#ReplyError",
   },
-  REDIRECT_DELAY: 3000
+  REDIRECT_DELAY: 3000,
 };
 // 表單狀態管理
 const FormState = {
@@ -100,49 +103,56 @@ const FormState = {
   SUBMITTING: "submitting",
   SUCCESS: "success",
   ERROR: "error",
-  CAPTCHA_ERROR: "captcha_error" // 新增的狀態
+  CAPTCHA_ERROR: "captcha_error", // 新增的狀態
 };
 // 表單處理
 function handleFormSubmit(e) {
   // e.preventDefault();
   const form = e.target;
+
   scrollToElement(CONFIG.SELECTORS.CONTACT_TITLE);
   updateFormState(FormState.SUBMITTING);
-  submitForm(form).then(response => {
-    console.log("response", response);
-    if (response.status >= 200 && response.status < 300) {
-      console.log("傳送成功", response.message);
-      updateFormState(FormState.SUCCESS);
-      animateSuccess().then(() => {
-        // startRedirectCountdown(CONFIG.REDIRECT_DELAY); // 重定向倒計時
-        startRedirectCountdown(
-        // 重定向倒計時
-        CONFIG.REDIRECT_DELAY, "countdown", redirectToReferrer);
-      });
-    } else {
-      throw new Error(response.message || "傳送失敗");
-    }
-  }).catch(error => {
-    console.error("傳送錯誤", error);
-    if (error.message === "驗證碼錯誤") {
-      showCaptchaError(error.message);
-    } else {
-      updateFormState(FormState.ERROR);
-      // showErrorMessage(error.message);
-      return animateError();
-    }
-  });
+  submitForm(form)
+    .then((response) => {
+      console.log("response", response);
+      if (response.status >= 200 && response.status < 300) {
+        console.log("傳送成功", response.message);
+        updateFormState(FormState.SUCCESS);
+        animateSuccess().then(() => {
+          // startRedirectCountdown(CONFIG.REDIRECT_DELAY); // 重定向倒計時
+          startRedirectCountdown( // 重定向倒計時
+            CONFIG.REDIRECT_DELAY,
+            "countdown",
+            redirectToReferrer
+          );
+        });
+      } else {
+        throw new Error(response.message || "傳送失敗");
+      }
+    })
+    .catch((error) => {
+      console.error("傳送錯誤", error);
+      if ( error.message === "驗證碼錯誤") {
+        showCaptchaError(error.message);
+      } else {
+        updateFormState(FormState.ERROR);
+        // showErrorMessage(error.message);
+        return animateError();
+      }
+    });
 }
 // 表單驗證碼錯誤
 function showCaptchaError(message) {
   const errorElement = qs(CONFIG.SELECTORS.REPLY_ERROR);
   const form = qs(CONFIG.SELECTORS.FORM);
   const replyElement = qs(CONFIG.SELECTORS.REPLY);
+
   form.style.display = "none";
   replyElement.classList.remove("hidden");
   replyElement.classList.add("flex");
   errorElement.classList.remove("hidden");
   errorElement.classList.add("flex");
+
   const titleElement = errorElement.querySelector(".contact__intro-title");
   if (titleElement) {
     titleElement.textContent = message;
@@ -153,11 +163,14 @@ function showCaptchaError(message) {
   if (!countdownElement) {
     const newCountdownElement = document.createElement("p");
     newCountdownElement.className = "contact__intro-text";
-    newCountdownElement.innerHTML = '將在 <span id="captchaCountdown" class="countdown">3</span> 秒後重新顯示表單';
+    newCountdownElement.innerHTML =
+      '將在 <span id="captchaCountdown" class="countdown">3</span> 秒後重新顯示表單';
     errorElement.appendChild(newCountdownElement);
   } else {
-    countdownElement.innerHTML = '將在 <span id="captchaCountdown" class="countdown">3</span> 秒後重新顯示表單';
+    countdownElement.innerHTML =
+      '將在 <span id="captchaCountdown" class="countdown">3</span> 秒後重新顯示表單';
   }
+
   startRedirectCountdown(3000, "captchaCountdown", showFormAfterError);
 }
 // 提交表單
@@ -174,6 +187,7 @@ function submitForm(form) {
     // xhr.open('GET', CONFIG.API_URL, true);
     xhr.open(form.method || "POST", apiUrl, true);
     xhr.responseType = "json";
+
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
         try {
@@ -185,16 +199,25 @@ function submitForm(form) {
           console.error("傳送錯誤", error);
           reject(new Error(error));
         }
-      } else if (xhr.status === 400 && xhr.response.message === "驗證碼錯誤") {
+      } else if (
+        xhr.status === 400 &&
+        xhr.response.message === "驗證碼錯誤"
+      ) {
         console.error(xhr.response?.message || xhr.response);
         reject(new Error("驗證碼錯誤"));
       } else {
-        reject(new Error(`錯誤狀態：${xhr.status}, ${xhr.response?.message || xhr.response || "未知錯誤"}`));
+        reject(
+          new Error(
+            `錯誤狀態：${xhr.status}, ${xhr.response?.message || xhr.response || "未知錯誤"}`
+          )
+        );
       }
     };
+
     xhr.onerror = function () {
       reject(new Error("網路錯誤"));
     };
+
     xhr.send(formData);
   });
 }
@@ -209,19 +232,23 @@ function updateUIForState(state) {
   const replyElement = qs(CONFIG.SELECTORS.REPLY);
   const successElement = qs(CONFIG.SELECTORS.REPLY_SUCCESS);
   const errorElement = qs(CONFIG.SELECTORS.REPLY_ERROR);
-  const isReplyVisible = state === FormState.SUCCESS || state === FormState.ERROR;
+
+  const isReplyVisible =
+    state === FormState.SUCCESS || state === FormState.ERROR;
   replyElement.classList.toggle("hidden", !isReplyVisible);
   replyElement.classList.toggle("flex", isReplyVisible);
+
   const isSuccessVisible = state === FormState.SUCCESS;
   successElement.classList.toggle("hidden", !isSuccessVisible);
   successElement.classList.toggle("flex", isSuccessVisible);
+
   const isErrorVisible = state === FormState.ERROR;
   errorElement.classList.toggle("hidden", !isErrorVisible);
   errorElement.classList.toggle("flex", isErrorVisible);
 }
 // 動畫處理-成功
 function animateSuccess() {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     requestAnimationFrame(() => {
       const form = qs(CONFIG.SELECTORS.FORM);
       form.style.display = "none";
@@ -232,7 +259,7 @@ function animateSuccess() {
 }
 // 動畫處理-失敗
 function animateError() {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     requestAnimationFrame(() => {
       const form = qs(CONFIG.SELECTORS.FORM);
       form.style.display = "none";
@@ -269,8 +296,10 @@ function startRedirectCountdown(delay, elementId, callback) {
     console.error(`找不到 ID 為 ${elementId} 的元素`);
     return;
   }
+
   let timeLeft = Math.floor(delay / 1000);
   countdownElement.textContent = timeLeft;
+
   const updateCountdown = setInterval(() => {
     timeLeft--;
     countdownElement.textContent = timeLeft;
@@ -287,6 +316,7 @@ function showFormAfterError() {
   const errorElement = qs(CONFIG.SELECTORS.REPLY_ERROR);
   const form = qs(CONFIG.SELECTORS.FORM);
   const replyElement = qs(CONFIG.SELECTORS.REPLY);
+
   replyElement.classList.add("hidden");
   replyElement.classList.remove("flex");
   errorElement.classList.add("hidden");
@@ -331,9 +361,13 @@ function showErrorMessage(message) {
 function scrollToElement(selector) {
   const $element = $(selector);
   if ($element.length) {
-    $("html, body").animate({
-      scrollTop: $element.offset().top
-    }, 500, "swing");
+    $("html, body").animate(
+      {
+        scrollTop: $element.offset().top,
+      },
+      500,
+      "swing"
+    );
   }
 }
 // 表單初始化
@@ -348,6 +382,7 @@ function initializeForm() {
 function initializeFormValidation() {
   const $form = $(CONFIG.SELECTORS.FORM);
   if (!$form.length) return;
+
   $form.validate({
     // 表單提交
     submitHandler: function (form, event) {
@@ -358,118 +393,117 @@ function initializeFormValidation() {
     rules: {
       // contact
       "contact_services[]": {
-        checkboxGroup: "input[name='contact_services[]']"
+        checkboxGroup: "input[name='contact_services[]']",
       },
       contact_company: "required",
       contact_company_phone: {
         required: true,
-        companyPhone: true
+        companyPhone: true,
       },
       contact_your_name: "required",
       contact_your_title: "required",
       contact_your_cellPhone: {
         required: true,
-        cellPhone: true
+        cellPhone: true,
       },
       contact_your_email: {
         required: true,
-        email: true
+        email: true,
       },
-      antispam: "required",
-      // 驗證碼
+      antispam: "required", // 驗證碼
       // brand
       brand_industry: "required",
       brand_company: "required",
       brand_company_phone: {
         required: true,
-        companyPhone: true
+        companyPhone: true,
       },
       brand_your_name: "required",
       brand_your_cell_phone: {
         required: true,
-        cellPhone: true
+        cellPhone: true,
       },
       brand_your_email: {
         required: true,
-        email: true
+        email: true,
       },
       // sales
       "sales_cities[]": {
-        checkboxGroup: "input[name='sales_cities[]']"
+        checkboxGroup: "input[name='sales_cities[]']",
       },
       sales_company: "required",
       sales_company_phone: {
         required: true,
-        companyPhone: true
+        companyPhone: true,
       },
       sales_your_name: "required",
       sales_your_cell_phone: {
         required: true,
-        cellPhone: true
+        cellPhone: true,
       },
       sales_your_email: {
         required: true,
-        email: true
+        email: true,
       },
-      sales_about_you: "required"
+      sales_about_you: "required",
     },
     // 錯誤訊息
     messages: {
       // contact
       "contact_services[]": {
-        checkboxGroup: "請至少勾選一個項目"
+        checkboxGroup: "請至少勾選一個項目",
       },
       contact_company: "請輸入您的診所名稱",
       contact_company_phone: {
         required: "請輸入診所電話",
-        companyPhone: "請確認電話號碼格式為：0X-XXXXXXXX"
+        companyPhone: "請確認電話號碼格式為：0X-XXXXXXXX",
       },
       contact_your_name: "請輸入您的姓名",
       contact_your_title: "請輸入您的職稱",
       contact_your_cellPhone: {
         required: "請輸入您的手機號碼",
-        cellPhone: "請確認手機格式為：09XXXXXXXX"
+        cellPhone: "請確認手機格式為：09XXXXXXXX",
       },
       contact_your_email: {
         required: "請輸入您的電子郵件",
-        email: "請輸入有效的電子郵件地址"
+        email: "請輸入有效的電子郵件地址",
       },
       antispam: "請輸入驗證碼",
       "sales_cities[]": {
-        checkboxGroup: "請至少選擇一個城市"
+        checkboxGroup: "請至少選擇一個城市",
       },
       // brand
       brand_industry: "請至少選擇一項",
       brand_company: "請輸入您的公司名稱",
       brand_company_phone: {
         required: "請輸入公司電話",
-        companyPhone: "請確認電話號碼格式為：0X-XXXXXXXX"
+        companyPhone: "請確認電話號碼格式為：0X-XXXXXXXX",
       },
       brand_your_name: "請輸入您的姓名",
       brand_your_cell_phone: {
         required: "請輸入您的手機號碼",
-        cellPhone: "請確認手機格式為：09XXXXXXXX"
+        cellPhone: "請確認手機格式為：09XXXXXXXX",
       },
       brand_your_email: {
         required: "請輸入您的電子郵件",
-        email: "請輸入有效的電子郵件地址"
+        email: "請輸入有效的電子郵件地址",
       },
       // sales
       sales_company: "請輸入您的公司名稱",
       sales_company_phone: {
         required: "請輸入公司電話",
-        companyPhone: "請確認電話號碼格式為：0X-XXXXXXXX"
+        companyPhone: "請確認電話號碼格式為：0X-XXXXXXXX",
       },
       sales_your_name: "請輸入您的姓名",
       sales_your_cell_phone: {
         required: "請輸入您的手機號碼",
-        cellPhone: "請確認手機格式為：09XXXXXXXX"
+        cellPhone: "請確認手機格式為：09XXXXXXXX",
       },
       sales_your_email: {
         required: "請輸入您的電子郵件",
-        email: "請輸入有效的電子郵件地址"
+        email: "請輸入有效的電子郵件地址",
       },
-      sales_about_you: "請輸入您的業務專長"
+      sales_about_you: "請輸入您的業務專長",
     },
     errorElement: "div",
     errorPlacement: customErrorPlacement,
@@ -482,11 +516,14 @@ function initializeFormValidation() {
       if (validator.errorList.length > 0) {
         let firstError = $(validator.errorList[0].element);
         console.log("firstError", firstError);
-        $("html, body").animate({
-          scrollTop: firstError.offset().top - $(window).height() / 2
-        }, 500);
+        $("html, body").animate(
+          {
+            scrollTop: firstError.offset().top - $(window).height() / 2,
+          },
+          500
+        );
       }
-    }
+    },
     // invalidHandler: function (event, validator) {
     //   if (validator.errorList.length > 0) {
     //     let firstError = $(validator.errorList[0].element);
@@ -495,6 +532,7 @@ function initializeFormValidation() {
     //   }
     // },
   });
+
   addCustomValidationMethods();
 }
 // 自定義錯誤訊息放置
@@ -528,7 +566,10 @@ function createErrorIcon() {
 // 自定義加上錯誤樣式
 function customHighlight(element) {
   const $element = $(element);
-  if ($element.attr("type") === "checkbox" || $element.attr("type") === "radio") {
+  if (
+    $element.attr("type") === "checkbox" ||
+    $element.attr("type") === "radio"
+  ) {
     const group = $element.closest(".checkbox-group, .radio-group");
     group.addClass("input-error");
     group.next(".error-container").show();
@@ -540,7 +581,10 @@ function customHighlight(element) {
 // 自定義移除錯誤樣式
 function customUnhighlight(element) {
   const $element = $(element);
-  if ($element.attr("type") === "checkbox" || $element.attr("type") === "radio") {
+  if (
+    $element.attr("type") === "checkbox" ||
+    $element.attr("type") === "radio"
+  ) {
     const group = $element.closest(".checkbox-group, .radio-group");
     group.removeClass("input-error");
     group.next(".error-container").hide();
@@ -551,30 +595,46 @@ function customUnhighlight(element) {
 }
 // 添加自定義驗證方法
 function addCustomValidationMethods() {
-  $.validator.addMethod("companyPhone", function (value, element) {
-    return this.optional(element) || /^0[0-9\-+*#,;]*$/.test(value);
-  }, "請確認電話號碼格式為：0X-XXXXXXXX");
-  $.validator.addMethod("cellPhone", function (value, element) {
-    return this.optional(element) || /^09\d{8}$/.test(value);
-  }, "請確認手機格式為：09XXXXXXXX");
-  $.validator.addMethod("checkboxGroup", function (value, element, param) {
-    return $(param + ":checked").length > 0;
-  }, "請至少選擇一個選項");
+  $.validator.addMethod(
+    "companyPhone",
+    function (value, element) {
+      return this.optional(element) || /^0[0-9\-+*#,;]*$/.test(value);
+    },
+    "請確認電話號碼格式為：0X-XXXXXXXX"
+  );
+  $.validator.addMethod(
+    "cellPhone",
+    function (value, element) {
+      return this.optional(element) || /^09\d{8}$/.test(value);
+    },
+    "請確認手機格式為：09XXXXXXXX"
+  );
+  $.validator.addMethod(
+    "checkboxGroup",
+    function (value, element, param) {
+      return $(param + ":checked").length > 0;
+    },
+    "請至少選擇一個選項"
+  );
 }
 // 初始化
 document.addEventListener("DOMContentLoaded", () => {
   initializeForm();
   modifyLinkTargets();
   renderStarRatings();
+
   const collapse = document.querySelector(".collapse");
   if (!collapse) return;
   const collapseToggle = document.querySelector(".collapse__toggle");
   if (!collapseToggle) return;
+
   collapse.addEventListener("click", handleCollapseMenuClick);
   collapseToggle.addEventListener("click", toggleMenu);
+
   window.addEventListener("resize", () => {
     hideMenu(collapse, collapseToggle);
   });
+
   const accordionHeader = document.querySelector(".accordion__header");
   if (accordionHeader) {
     accordionHeader.addEventListener("click", toggleAccordionContent);

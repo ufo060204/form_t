@@ -1,249 +1,333 @@
 :root {
---primary-100: #2552a8;
---primary-200: #1a78a2;
---primary-300: #5f809a;
---primary-400: #01c4a2;
---primary-500: #1c93cc;
---primary-600: #e4f4fc;
---primary-700: #9eb2a2;
---primary-800: #9de1f4;
---primary-900: #55b7e3;
---primary-1000: #d2e2ef;
+  --primary-100: #2552a8;
+  --primary-200: #1a78a2;
+  --primary-300: #5f809a;
+  --primary-400: #01c4a2;
+  --primary-500: #1c93cc;
+  --primary-600: #e4f4fc;
+  --primary-700: #9eb2a2;
+  --primary-800: #9de1f4;
+  --primary-900: #55b7e3;
+  --primary-1000: #d2e2ef;
+  --primary-1100: #07648D;
 
---secondary-100: #6b7281;
---secondary-200: #737373;
---secondary-300: #8c8c8c;
---secondary-400: #8b8b8b;
---secondary-500: #c0c0c0;
---secondary-600: #bfbfbf;
---secondary-700: #e3e5d9;
---secondary-800: #e6ebe7;
---secondary-900: #bfcbcb;
---secondary-1000: #879197;
---secondary-1100: #595959;
---secondary-1200: #f5f5f5;
---secondary-1300: #a6a6a6;
+  --secondary-100: #6b7281;
+  --secondary-200: #737373;
+  --secondary-300: #8c8c8c;
+  --secondary-400: #8b8b8b;
+  --secondary-500: #c0c0c0;
+  --secondary-600: #bfbfbf;
+  --secondary-700: #e3e5d9;
+  --secondary-800: #e6ebe7;
+  --secondary-900: #bfcbcb;
+  --secondary-1000: #879197;
+  --secondary-1100: #595959;
+  --secondary-1200: #f5f5f5;
+  --secondary-1300: #a6a6a6;
+  --secondary-1400: #D9D9D9;
 
---tertiary-100: #f97425;
---tertiary-200: #92d050;
---tertiary-300: #f08163;
---star: #ffd000;
---danger: #c00000;
---white: #ffffff;
---transparent: transparent;
-
-
-
-/** 元件 */
-/* navbar */
---navbar-bg: var(--white);
---nav__link-color: var(--secondary-100);
---nav__link-show-after-bg: var(--primary-200);
---nav__link-show-before-bg: var(--primary-200);
---nav__menu-container-bg: var(--white);
---nav__menu-container-border: var(--secondary-500);
---nav__list-color : var(--secondary-100);
---nav__list-border: var(--secondary-100);
---nav__list-hover-color: var(--tertiary-100);
-
-/* 下拉選單 dropdown(另一版型使用) */
---dropdown__menu-bg: var(--white);
---dropdown__menu-border: var(--secondary-500);
---dropdown__link-color: var(--secondary-100);
---dropdown__link-border: var(--secondary-100);
---dropdown__link-hover-color: var(--tertiary-100);
-
-/* 漢堡選單 collapse */
---collapse-bg: var(--white);
---collapse__item-border: var(--secondary-500);
---collapse__title-color: var(--secondary-100);
---collapse__link-color: var(--secondary-1000);
---collapse__link-border: var(--secondary-1000);
---collapse__link-hover-color: var(--tertiary-100);
-
-/* 麵包屑 breadcrumb */
---breadcrumb__item-color: var(--secondary-100);
---breadcrumb__item--active-color: var(--primary-200);
-
-/* 導覽指標 navigation */
---navigation__icon-fill: var(--secondary-100);
---navigation__icon--clinic-hover-fill: var(--primary-100);
---navigation__icon--article-hover-fill: var(--primary-200);
-
-/* 手風琴(文章頁 menu) accordion */
---accordion-border: var(--secondary-1300);
---accordion-bg: var(--secondary-1200);
---accordion__header-title-color: var(--secondary-100);
---accordion__header-subtitle-color: var(--secondary-100);
---accordion__link-color: var(--primary-200);
-/*** 卡片 */
-/* 廣告系統卡片 card-clinic-ads */
---card-clinic-ads-border: var(--secondary-400);
---card-clinic-ads-hover-border: var(--primary-100);
---card-clinic-ads__title-color: var(--primary-100);
---card-clinic-ads__tel-color: var(--tertiary-100);
---card-clinic-ads__text-color: var(--secondary-100);
---card-clinic-ads__list-color: var(--primary-400);
---card-clinic-ads__list-border: var(--primary-400);
---card-clinic-ads__detail-leader-color: var(--secondary-100);
---card-clinic-ads__detail-member-color: var(--secondary-100);
---card-clinic-ads__detail-address-color: var(--secondary-100);
---card-clinic-ads__detail-rating-color: var(--secondary-100);
---card-clinic-ads-star-color: var(--star);
-
-/* 診所列表卡片 card-clinic */
---card-clinic-border: var(--secondary-400);
---card-clinic-hover-border: var(--primary-100);
---card-clinic__title-color: var(--primary-100);
---card-clinic__tel-color: var(--tertiary-100);
---card-clinic__text-color: var(--secondary-100);
---card-clinic__list-color: var(--primary-400);
---card-clinic__list-border: var(--primary-400);
---card-clinic__detail-leader-color: var(--secondary-100);
---card-clinic__detail-member-color: var(--secondary-100);
---card-clinic__detail-address-color: var(--secondary-100);
---card-clinic__detail-rating-color: var(--secondary-100);
---card-clinic__detail-danger-color: var(--tertiary-100);
---card-clinic-star-color: var(--star);
-
-/* 推薦文章卡片 card-story */
---card-story-hover-border: var(--primary-100);
---card-story-border: var(--secondary-400);
---card-story__text-color: var(--secondary-100);
---card-story__title-color: var(--secondary-1100);
---card-story__title-border: var(--secondary-1100);
-
-/* 側欄卡片 card-clinic-aside */
---card-clinic-aside__title-color: var(--secondary-100);
---card-clinic-aside__title-border: var(--secondary-100);
---card-clinic-aside__text-color: var(--secondary-300);
-/* 側欄卡片-院長 card-clinic-aside-leader */
---card-clinic-aside-leader__title-color: var(--secondary-100);
---card-clinic-aside-leader__title-border: var(--tertiary-200);
---card-clinic-aside-leader__text-color: var(--secondary-300);
-
-/* 文章列表卡片 card-article */
---card-article-border: var(--secondary-400);
---card-article-hover-border: var(--primary-100);
---card-article__title-color: var(--primary-200);
---card-article__text-color: var(--secondary-100);
-/*** 按鈕 */
-/* 診所卡片按鈕 */
---btn-card-clinic-color: var(--primary-500);
---btn-card-clinic-bg: var(--white);
---btn-card-clinic-border: var(--primary-500);
---btn-card-clinic-hover-bg: var(--primary-200);
-
-/* 文章卡片按鈕 */
---btn-card-story-color: var(--primary-500);
---btn-card-story-bg: var(--white);
---btn-card-story-border: var(--primary-500);
---btn-card-story-hover-bg: var(--primary-200);
-
-/* footer 診所合作聯繫按鈕 */
---btn-contact-color: var(--white);
---btn-contact-bg: var(--primary-500);
---btn-contact-hover-bg: var(--primary-200);
+  --tertiary-100: #f97425;
+  --tertiary-200: #92d050;
+  --tertiary-300: #f08163;
+  --star: #ffd000;
+  --danger: #c00000;
+  --white: #ffffff;
+  --transparent: transparent;
 
 
-/** 區域 */
-/* banner 共同區域 */
---banner__header-ads-bg: var(--tertiary-200);
---banner__body-bg: var(--primary-200);
---banner__title-color: var(--white);
---banner__link-border: var(--white);
---banner__link-color: var(--white);
---banner__link-hover-color: var(--primary-800);
---banner__text-color: var(--white);
-/* aside 側欄 */
---aside-bg: var(--secondary-800);
---aside__title-color: var(--primary-300);
---aside__title--bg-color: var(--primary-300);
---aside__title--bg-bg: var(--secondary-700);
---aside__list-color: var(--secondary-100);
---aside__list-border: var(--primary-900);
+  /** 元件 */
+  /* navbar */
+  --navbar-bg: var(--white);
+  --nav__link-color: var(--secondary-100);
+  --nav__link-show-after-bg: var(--primary-200);
+  --nav__link-show-before-bg: var(--primary-200);
+  --nav__menu-container-bg: var(--white);
+  --nav__menu-container-border: var(--secondary-500);
+  --nav__list-color: var(--secondary-100);
+  --nav__list-border: var(--secondary-100);
+  --nav__list-hover-color: var(--tertiary-100);
 
-/* footer */
---footer__text-color: var(--secondary-200);
+  /* 下拉選單 dropdown(另一版型使用) */
+  --dropdown__menu-bg: var(--white);
+  --dropdown__menu-border: var(--secondary-500);
+  --dropdown__link-color: var(--secondary-100);
+  --dropdown__link-border: var(--secondary-100);
+  --dropdown__link-hover-color: var(--tertiary-100);
 
-/*** new_normal 診所頁 */
-/* banner-normal */
---banner-normal__info-location-color: var(--white);
---banner-normal__info-rating-color: var(--white);
---banner-normal__detail-leader-color: var(--white);
---banner-normal__detail-tel-color: var(--white);
---banner-normal__detail-address-color: var(--white);
---banner-normal-star-color: var(--white);
+  /* 漢堡選單 collapse */
+  --collapse-bg: var(--white);
+  --collapse__item-border: var(--secondary-500);
+  --collapse__title-color: var(--secondary-100);
+  --collapse__link-color: var(--secondary-1000);
+  --collapse__link-border: var(--secondary-1000);
+  --collapse__link-hover-color: var(--tertiary-100);
 
-/* intro 診所介紹 */
---intro-bg: var(--primary-600);
---intro__title-color: var(--primary-300);
---intro__title-border: var(--primary-200);
---intro__text-color: var(--secondary-100);
+  /* 麵包屑 breadcrumb */
+  --breadcrumb__item-color: var(--secondary-100);
+  --breadcrumb__item--active-color: var(--primary-200);
 
-/* member 醫師介紹 */
---member__title-color: var(--primary-300);
---member__title-border: var(--primary-200);
---member__subtitle-color: var(--primary-200);
---member__list-color: var(--secondary-100);
---member__list-before-color: var(--secondary-100);
---member__sublist-color: var(--tertiary-100);
---member__tertiary-list-color: var(--secondary-100);
+  /* 導覽指標 navigation */
+  --navigation__icon-fill: var(--secondary-100);
+  --navigation__icon--clinic-hover-fill: var(--primary-100);
+  --navigation__icon--article-hover-fill: var(--primary-200);
 
-/* type 診療類別 */
---type__title-color: var(--primary-300);
---type__title-border: var(--primary-200);
---type__list-color: var(--primary-400);
---type__list-border: var(--primary-400);
+  /* 手風琴(文章頁 menu) accordion */
+  --accordion-border: var(--secondary-1300); 
+  --accordion-bg: var(--secondary-1200);
+  --accordion__header-title-color: var(--secondary-100);
+  --accordion__header-subtitle-color: var(--secondary-100);
+  --accordion__menu-color: var(--primary-200);
+  --accordion__link-color: var(--primary-200);
+  
+  /*** 卡片 */
+  /* 廣告系統卡片 card-clinic-ads */
+  --card-clinic-ads-border: var(--secondary-400);
+  --card-clinic-ads-hover-border: var(--primary-100);
+  --card-clinic-ads__title-color: var(--primary-100);
+  --card-clinic-ads__tel-color: var(--tertiary-100);
+  --card-clinic-ads__text-color: var(--secondary-100);
+  --card-clinic-ads__list-color: var(--primary-400);
+  --card-clinic-ads__list-border: var(--primary-400);
+  --card-clinic-ads__detail-member-color: var(--secondary-100);
+  --card-clinic-ads__detail-leader-color: var(--secondary-100);
+  --card-clinic-ads__detail-address-color: var(--secondary-100);
+  --card-clinic-ads__detail-rating-color: var(--secondary-100);
+  --card-clinic-ads-star-color: var(--star);
 
-/* time 看診時間 */
---time__title-color: var(--primary-300);
---time__title-border: var(--primary-200);
---time__text-color: var(--secondary-100);
---time__table-color: var(--secondary-100);
---time__table-border: var(--primary-700);
---time__table-bg: var(--secondary-800);
+  /* 診所列表卡片 card-clinic */
+  --card-clinic-border: var(--secondary-400);
+  --card-clinic-hover-border: var(--primary-100);
+  --card-clinic__title-color: var(--primary-100);
+  --card-clinic__tel-color: var(--tertiary-100);
+  --card-clinic__text-color: var(--secondary-100);
+  --card-clinic__list-color: var(--primary-400);
+  --card-clinic__list-border: var(--primary-400);
+  --card-clinic__detail-leader-color: var(--secondary-100);
+  --card-clinic__detail-member-color: var(--secondary-100);
+  --card-clinic__detail-address-color: var(--secondary-100);
+  --card-clinic__detail-rating-color: var(--secondary-100);
+  --card-clinic__detail-danger-color: var(--tertiary-100);
+  --card-clinic-star-color: var(--star);
 
-/* official 官方連結 */
---official__title-color: var(--primary-300);
---official__title-border: var(--primary-200);
---official__link-color: var(--white);
---official__link-bg: var(--primary-500);
---official__link-hover-bg: var(--tertiary-300);
---official__link-after-color: var(--white);
+  /* 推薦文章卡片 card-story */
+  --card-story-hover-border: var(--primary-100);
+  --card-story-border: var(--secondary-400);
+  --card-story__text-color: var(--secondary-100);
+  --card-story__title-color: var(--secondary-1100);
+  --card-story__title-border: var(--secondary-1100);
 
-/* map 交通資訊 */
---map__title-color: var(--primary-300);
---map__title-border: var(--primary-200);
---map__list-color: var(--secondary-100);
+  /* 側欄卡片 card-clinic-aside */
+  --card-clinic-aside__title-color: var(--secondary-100);
+  --card-clinic-aside__title-border: var(--secondary-100);
+  --card-clinic-aside__text-color: var(--secondary-300);
+  
+  /* 側欄卡片-院長 card-clinic-aside-leader */
+  --card-clinic-aside-leader__title-color: var(--secondary-100);
+  --card-clinic-aside-leader__title-border: var(--tertiary-200);
+  --card-clinic-aside-leader__text-color: var(--secondary-300);
 
-/* comment 網友評論 */
---comment-star-color: var(--star);
---comment__title-color: var(--primary-300);
---comment__title-border: var(--primary-200);
---comment__list-body-color: var(--secondary-100);
---comment__list-body-highlight-color: var(--danger);
+  /* 文章列表卡片 card-article */
+  --card-article-border: var(--secondary-400);
+  --card-article-hover-border: var(--primary-100);
+  --card-article__title-color: var(--primary-200);
+  --card-article__text-color: var(--secondary-100);
+  
+  /*** 按鈕 */
+  /* 診所卡片按鈕 */
+  --btn-card-clinic-color: var(--primary-500);
+  --btn-card-clinic-bg: var(--white);
+  --btn-card-clinic-border: var(--primary-500);
 
-/* price 收費標準 */
---price__title-color: var(--primary-300);
---price__title-border: var(--primary-200);
---price__list-header-color: var(--secondary-100);
---price__list-body-color: var(--secondary-100);
+  /* 文章卡片按鈕 */
+  --btn-card-story-color: var(--primary-500);
+  --btn-card-story-bg: var(--white);
+  --btn-card-story-border: var(--primary-500);
 
-/* recommend 網友推薦 */
---recommend__title-color: var(--tertiary-300);
---recommend__title-border: var(--tertiary-300);
+  /* footer 診所合作聯繫按鈕 */
+  --btn-contact-color: var(--white);
+  --btn-contact-bg: var(--primary-500);
+  --btn-contact-hover-bg: var(--primary-200);
 
-/*** new_knowledge 文章列表頁, new_article 文章頁 */
-/* knowledge 推薦名單 */
---knowledge__title-color: var(--primary-100);
---knowledge__text-color: var(--secondary-100);
---knowledge__text-border: var(--secondary-400);
 
-/*** new_article 文章頁 */
-/* article 文章 */
---article-border: var(--primary-1000);
---article__title-color: var(--primary-200);
---article__text-color: var(--secondary-100);
---article__link-color: var(--primary-900);
+  /** 區域 */
+  /* banner 共同區域 */
+  --banner__header-ads-bg: var(--tertiary-200);
+  --banner__body-bg: var(--primary-200);
+  --banner__title-color: var(--white);
+  --banner__link-border: var(--white);
+  --banner__link-color: var(--white);
+  --banner__link-hover-color: var(--primary-800);
+  
+  /* aside 側欄 */
+  --aside-bg: var(--secondary-800);
+  --aside__title-color: var(--primary-300);
+  --aside__title--bg-color: var(--primary-300);
+  --aside__title--bg-bg: var(--secondary-700);
+  --aside__list-color: var(--secondary-100);
+  --aside__list-border: var(--secondary-900);
+
+  /* footer */
+  --footer__text-color: var(--secondary-200);
+
+  /*** new_index 首頁 */
+  /* banner-index */
+  --banner-index__header-bg: var(--primary-200);
+  --banner-index__title-color: var(--white);
+  --banner-index__text-color: var(--white);
+  --banner-index__link-color: var(--white);
+  --banner-index__link-border: var(--white);
+  --banner-index__link-hover-bg: var(--primary-1100);
+  --banner-index__link-hover-color: var(--primary-1100);
+  --banner-index__footer-bg: var(--tertiary-200);
+
+  /* education 最受關注衛教資訊 */
+  --education__title-color: var(--secondary-1400);
+  --education__link-color: var(--white);
+  --education__card--dark-bg--r: var(--primary-200);
+  --education__card--dark-bg--l: var(--tertiary-200);
+  --education__card--dark-bg--mb: var(--primary-200);
+
+  /* news 最新牙科新聞 / 產業新知 */
+  --news__card--dark-title-color: var(--secondary-1400);
+  --news__card--dark-bg--l: var(--primary-200);
+  --news__card--dark-bg--r: var(--tertiary-200);
+  --news__card--dark-bg--mb: var(--primary-200);
+  --news__card--light-bg: var(--white);
+  --news__card--light-title-color: var(--secondary-100);
+  --news__link-color: var(--white);
+  --news__text-color: var(--secondary-100);
+  --news__btn-border: var(--tertiary-200);
+  --news__btn-color: var(--secondary-100);
+  --news__btn-hover-color: var(--white);
+  --news__btn-hover-bg: var(--tertiary-200);
+
+  /* guide 六都最新牙科收費標準, 植牙大小事懶人包 */
+  --guide__title-color: var(--secondary-100);
+  --guide__title-color--mb: var(--white);
+  --guide__text-color: var(--secondary-100);
+  --guide__link-color: var(--primary-200);
+  --guide__link-color--mb: var(--white);
+  --guide__link-border: var(--primary-200);
+  --guide__link-border--mb: var(--white);
+  --guide__link-hover-color: var(--secondary-100);
+  --guide__card--primary-border: var(--primary-200);
+  --guide__card--primary-bg: var(--primary-200);
+  --guide__card--tertiary-border: var(--tertiary-200);
+
+  /* partner 診所合作服務, 經銷本站的診所合作業務 */
+  --partner__card--dark-title-color : var(--secondary-1400);
+  --partner__card--dark-bg--l: var(--primary-200);
+  --partner__card--dark-bg--r: var(--tertiary-200);
+  --partner__card--dark-bg--mb: var(--primary-200);
+  --partner__card--dark-btn-border: var(--white);
+  --partner__card--dark-btn-color: var(--white);
+  --partner__card--dark-btn-hover-bg: var(--primary-1100);
+  --partner__card--light-bg: var(--white);
+  --partner__card--light-title-color: var(--secondary-100);
+  --partner__card--light-btn-border: var(--tertiary-200);
+  --partner__card--light-btn-color: var(--secondary-100);
+  --partner__card--light-btn-hover-color: var(--white);
+  --partner__card--light-btn-hover-bg: var(--tertiary-200);
+  --partner__text-color: var(--secondary-100);
+  --partner__list-color: var(--white);
+
+  /*** new_normal 診所頁 */
+  /* banner-normal */
+  --banner-normal__info-location-color: var(--white);
+  --banner-normal__info-rating-color: var(--white);
+  --banner-normal__detail-leader-color: var(--white);
+  --banner-normal__detail-tel-color: var(--white);
+  --banner-normal__detail-address-color: var(--white);
+  --banner-normal-star-color: var(--white);
+
+  /* intro 診所介紹 */
+  --intro-bg: var(--primary-600);
+  --intro__title-color: var(--primary-300);
+  --intro__title-border: var(--primary-200);
+  --intro__text-color: var(--secondary-100);
+
+  /* member 醫師介紹 */
+  --member__title-color: var(--primary-300);
+  --member__title-border: var(--primary-200);
+  --member__subtitle-color: var(--primary-200);
+  --member__list-color: var(--secondary-100);
+  --member__list-before-color: var(--secondary-100);
+  --member__sublist-color: var(--tertiary-100);
+  --member__tertiary-list-color: var(--secondary-100);
+
+  /* type 診療類別 */
+  --type__title-color: var(--primary-300);
+  --type__title-border: var(--primary-200);
+  --type__list-color: var(--primary-400);
+  --type__list-border: var(--primary-400);
+
+  /* time 看診時間 */
+  --time__title-color: var(--primary-300);
+  --time__title-border: var(--primary-200);
+  --time__text-color: var(--secondary-100);
+  --time__table-color: var(--secondary-100);
+  --time__table-border: var(--primary-700);
+  --time__table-bg: var(--secondary-800);
+  --time__table-bg--sunday: var(--secondary-700);
+
+  /* official 官方連結 */
+  --official__title-color: var(--primary-300);
+  --official__title-border: var(--primary-200);
+  --official__link-color: var(--white);
+  --official__link-bg: var(--primary-500);
+  --official__link-hover-bg: var(--tertiary-300);
+  --official__link-after-color: var(--white);
+
+  /* map 交通資訊 */
+  --map__title-color: var(--primary-300);
+  --map__title-border: var(--primary-200);
+  --map__list-color: var(--secondary-100);
+
+  /* comment 網友評論 */
+  --comment-star-color: var(--star);
+  --comment__title-color: var(--primary-300);
+  --comment__title-border: var(--primary-200);
+  --comment__list-body-color: var(--secondary-100);
+  --comment__list-body-highlight-color: var(--danger);
+
+  /* price 收費標準 */
+  --price__title-color: var(--primary-300);
+  --price__title-border: var(--primary-200);
+  --price__list-header-color: var(--secondary-100);
+  --price__list-body-color: var(--secondary-100);
+
+  /* recommend 網友推薦 */
+  --recommend__title-color: var(--tertiary-300);
+  --recommend__title-border: var(--tertiary-300);
+
+  /*** new_knowledge 文章列表頁, new_article 文章頁 */
+  /* knowledge 推薦名單 */
+  --knowledge__title-color: var(--primary-100);
+  --knowledge__text-color: var(--secondary-100);
+  --knowledge__text-border: var(--secondary-400);
+
+  /*** new_article 文章頁 */
+  /* article 文章 */
+  --article-border: var(--primary-1000);
+  --article__title-color: var(--primary-200);
+  --article__text-color: var(--secondary-100);
+  --article__link-color: var(--primary-900);
+
+  /*** new_contact 聯絡我們 */
+  --contact__input-border: var(--primary-200);
+  --contact__input--text-bg: var(--secondary-1400);
+  --contact__link-color: var(--white);
+  --contact__link-bg: var(--tertiary-200);
+  --contact__link-border: var(--secondary-400);
+  --contact__link-hover-color: var(--white);
+  --contact__link-hover-bg: var(--tertiary-200);
+  --contact__title-color: var(--white);
+  --contact__title-bg: var(--primary-200);
+  --contact__submit-color: var(--primary-500);
+  --contact__submit-bg: var(--white);
+  --contact__submit-border: var(--primary-500);
+  --contact__submit-hover-color: var(--white);
+  --contact__submit-hover-bg: var(--primary-500);
+  --contact__aside-color: var(--white);
+  --contact__aside-bg: var(--tertiary-200);
 }
