@@ -349,27 +349,28 @@ function showErrorMessage(message) {
   <p class="contact__intro-title">${message}</p>
   `;
 }
-// function scrollToElement(selector) {
-//   const element = qs(selector);
-//   element.scrollIntoView({
-//       behavior: "smooth",
-//       block: "start",
-//       inline: "center",
-//     });
-//   }
 // 滑到指定元素
 function scrollToElement(selector) {
-  const $element = $(selector);
-  if ($element.length) {
-    $("html, body").animate(
-      {
-        scrollTop: $element.offset().top,
-      },
-      500,
-      "swing"
-    );
+  const element = qs(selector);
+  element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "center",
+    });
   }
-}
+// 滑到指定元素
+// function scrollToElement(selector) {
+//   const $element = $(selector);
+//   if ($element.length) {
+//     $("html, body").animate(
+//       {
+//         scrollTop: $element.offset().top,
+//       },
+//       500,
+//       "swing"
+//     );
+//   }
+// }
 // 表單初始化
 function initializeForm() {
   const form = qs(CONFIG.SELECTORS.FORM);
@@ -512,25 +513,25 @@ function initializeFormValidation() {
     // onfocusout: function (element) {
     //   this.element(element);
     // },
-    invalidHandler: function (event, validator) {
-      if (validator.errorList.length > 0) {
-        let firstError = $(validator.errorList[0].element);
-        console.log("firstError", firstError);
-        $("html, body").animate(
-          {
-            scrollTop: firstError.offset().top - $(window).height() / 2,
-          },
-          500
-        );
-      }
-    },
     // invalidHandler: function (event, validator) {
     //   if (validator.errorList.length > 0) {
     //     let firstError = $(validator.errorList[0].element);
     //     console.log("firstError", firstError);
-    //     firstError[0].scrollIntoView({ behavior: "smooth" });
+    //     $("html, body").animate(
+    //       {
+    //         scrollTop: firstError.offset().top - $(window).height() / 2,
+    //       },
+    //       500
+    //     );
     //   }
     // },
+    invalidHandler: function (event, validator) {
+      if (validator.errorList.length > 0) {
+        let firstError = $(validator.errorList[0].element);
+        console.log("firstError", firstError);
+        firstError[0].scrollIntoView({ behavior: "smooth" });
+      }
+    },
   });
 
   addCustomValidationMethods();
