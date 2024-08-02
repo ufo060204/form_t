@@ -320,27 +320,23 @@ function showErrorMessage(message) {
   `;
 }
 // 滑到指定元素
-function scrollToElement(selector) {
-  const element = qs(selector);
-  element.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-    inline: "center"
-  });
-}
-// 滑到指定元素
 // function scrollToElement(selector) {
-//   const $element = $(selector);
-//   if ($element.length) {
-//     $("html, body").animate(
-//       {
-//         scrollTop: $element.offset().top,
-//       },
-//       500,
-//       "swing"
-//     );
+//   const element = qs(selector);
+//   element.scrollIntoView({
+//       behavior: "smooth",
+//       block: "start",
+//       inline: "center",
+//     });
 //   }
-// }
+// 滑到指定元素
+function scrollToElement(selector) {
+  const $element = $(selector);
+  if ($element.length) {
+    $("html, body").animate({
+      scrollTop: $element.offset().top
+    }, 500, "swing");
+  }
+}
 // 表單初始化
 function initializeForm() {
   const form = qs(CONFIG.SELECTORS.FORM);
@@ -479,7 +475,7 @@ function initializeFormValidation() {
     errorElement: "div",
     errorPlacement: customErrorPlacement,
     highlight: customHighlight,
-    unhighlight: customUnhighlight
+    unhighlight: customUnhighlight,
     // onfocusout: function (element) {
     //   this.element(element);
     // },
@@ -495,13 +491,15 @@ function initializeFormValidation() {
     //     );
     //   }
     // },
-    // invalidHandler: function (event, validator) {
-    //   if (validator.errorList.length > 0) {
-    //     let firstError = $(validator.errorList[0].element);
-    //     console.log("firstError", firstError);
-    //     firstError[0].scrollIntoView({ behavior: "smooth" });
-    //   }
-    // },
+    invalidHandler: function (event, validator) {
+      if (validator.errorList.length > 0) {
+        let firstError = $(validator.errorList[0].element);
+        console.log("firstError", firstError);
+        firstError[0].scrollIntoView({
+          behavior: "smooth"
+        });
+      }
+    }
   });
   addCustomValidationMethods();
 }
