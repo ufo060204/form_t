@@ -479,7 +479,7 @@ function initializeFormValidation() {
     errorElement: "div",
     errorPlacement: customErrorPlacement,
     highlight: customHighlight,
-    unhighlight: customUnhighlight,
+    unhighlight: customUnhighlight
     // onfocusout: function (element) {
     //   this.element(element);
     // },
@@ -495,15 +495,13 @@ function initializeFormValidation() {
     //     );
     //   }
     // },
-    invalidHandler: function (event, validator) {
-      if (validator.errorList.length > 0) {
-        let firstError = $(validator.errorList[0].element);
-        console.log("firstError", firstError);
-        firstError[0].scrollIntoView({
-          behavior: "smooth"
-        });
-      }
-    }
+    // invalidHandler: function (event, validator) {
+    //   if (validator.errorList.length > 0) {
+    //     let firstError = $(validator.errorList[0].element);
+    //     console.log("firstError", firstError);
+    //     firstError[0].scrollIntoView({ behavior: "smooth" });
+    //   }
+    // },
   });
   addCustomValidationMethods();
 }
