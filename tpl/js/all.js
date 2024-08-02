@@ -525,13 +525,13 @@ function initializeFormValidation() {
     //     );
     //   }
     // },
-    invalidHandler: function (event, validator) {
-      if (validator.errorList.length > 0) {
-        let firstError = $(validator.errorList[0].element);
-        console.log("firstError", firstError);
-        firstError[0].scrollIntoView({ behavior: "smooth" });
-      }
-    },
+    // invalidHandler: function (event, validator) {
+    //   if (validator.errorList.length > 0) {
+    //     let firstError = $(validator.errorList[0].element);
+    //     console.log("firstError", firstError);
+    //     firstError[0].scrollIntoView({ behavior: "smooth" });
+    //   }
+    // },
   });
 
   addCustomValidationMethods();
