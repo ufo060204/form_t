@@ -44,9 +44,14 @@ module.exports = {
   output: {
     filename: "all.js", // 更改輸出的檔名
     path: path.resolve(__dirname, "./tpl_c/js/"), // 輸出目錄
-    library: "MyLibrary",
-    libraryTarget: "window",
-    libraryExport: "default",
+    // library: "all",
+    // libraryTarget: "window",
+    // libraryExport: "default",
+    library: {
+      name: "myLibrary",
+      type: "window",
+    },
+    libraryTarget: "umd",
   },
   // plugins: [
   //   // 添加這個 plugins 數組

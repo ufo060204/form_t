@@ -18,6 +18,7 @@ var autoprefixer = require("autoprefixer");
 var sourcemaps = require("gulp-sourcemaps");
 var postcss = require("gulp-postcss");
 var tailwindcss = require("tailwindcss");
+const TerserPlugin = require("terser-webpack-plugin");
 
 var tailwindConfig = {
   default: { config: "tailwind.config.cjs" },
@@ -162,36 +163,30 @@ function createWebpackTask(
 ) {
   return gulp.task(taskName, function () {
     // 複製 webpackConfig
-    // const config = Object.assign({}, webpackConfig);
-    // console.log(config);
+    const config = Object.assign({}, webpackConfig);
+    console.log(config);
 
-    // // 根據環境設置 mode
-    // config.mode = isProduction ? "production" : "development";
+    // 根據環境設置 mode
+    config.mode = isProduction ? "production" : "development";
 
-    // // 配置 optimization
-    // config.optimization = config.optimization || {};
-    // if (isProduction) {
-    //   config.optimization.minimize = true; //
-    //   config.optimization.minimizer = [
-    //     new TerserPlugin({
-    //       terserOptions: {
-    //         // keep_fnames: /^renderStarRatings$/,
-    //         keep_fnames: /^(renderStarRatings|get_api_admodule)$/,
-    //         compress: {
-    //           drop_console: true,
-    //         },
-    //       },
-    //     }),
-    //   ];
-    // }
-    // if (!isProduction) {
-    //   config.output = config.output || {};
-    //   config.output.library = "MyLibrary";
-    //   config.output.libraryTarget = "window";
-    //   config.output.libraryExport = "default";
-    // }
+    // 配置 optimization
+    config.optimization = config.optimization || {};
+    if (isProduction) {
+      config.optimization.minimize = true; //
+      config.optimization.minimizer = [
+        new TerserPlugin({
+          terserOptions: {
+            // keep_fnames: /^renderStarRatings$/,
+            keep_fnames: /^(renderStarRatings|get_api_admodule)$/,
+            compress: {
+              drop_console: true,
+            },
+          },
+        }),
+      ];
+    }
     // // 設置適當的 devtool
-    // config.devtool = isProduction ? "source-map" : "eval-source-map";
+    config.devtool = isProduction ? "source-map" : "eval-source-map";
 
     return (
       gulp

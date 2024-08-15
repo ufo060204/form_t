@@ -12,7 +12,8 @@ function modifyLinkTargets() {
   });
 }
 // 評分星星
-function renderStarRatings() {
+export function renderStarRatings() {
+  console.log("renderStarRatings 被呼叫了");
   const starRatings = document.querySelectorAll(".star-rating");
   if (starRatings) {
     starRatings.forEach((starRating) => {
@@ -643,3 +644,22 @@ document.addEventListener("DOMContentLoaded", () => {
     accordionHeader.addEventListener("click", toggleAccordionContent);
   }
 });
+
+export function test() {
+  console.log("我是 test");
+}
+
+export function all(a, b) {
+  // console.log();
+  return a + b;
+}
+
+// 加上這個判斷，可以在瀏覽器 console 直接呼叫函數
+if (typeof window !== "undefined") {
+  window.renderStarRatings = renderStarRatings;
+}
+
+// export default all;
+
+// all();
+
