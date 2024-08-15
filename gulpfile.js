@@ -323,6 +323,11 @@ createVariableTask(
   ["tpl/css/variable.css"],
   "dist/css/"
 );
+createVariableTask(
+  "new-css-variable-build-online",
+  ["tpl/css/variable.css"],
+  "css/"
+);
 
 // 開發任務
 createWebpackTask("webpack:dev", "tpl_c/js/all.js", "tpl_c/js/", false);
@@ -335,6 +340,7 @@ createCleanTask("clean:dist", ["dist/**/*"]);
 createConnectTask("connect:tpl_c", "./tpl_c");
 createConnectTask("connect:index", "./tpl_c");
 createConnectTask("connect:dist", "./dist");
+createConnectTask("connect:root", "./");
 
 gulp.task("new-watches-dev", function () {
   // gulp.watch("assets/**/js/*.{js, cjs}", gulp.series("new-init"));
@@ -362,6 +368,14 @@ gulp.task("new-minFs", function () {
     .pipe(gulpif("*.js", uglify()))
     .pipe(gulpif("*.css", cleanCSS()))
     .pipe(gulp.dest("dist"));
+});
+gulp.task("new-minFs-online", function () {
+  return gulp
+    .src("tpl_c/*.html")
+    .pipe(useref())
+    .pipe(gulpif("*.js", uglify()))
+    .pipe(gulpif("*.css", cleanCSS()))
+    .pipe(gulp.dest("./"));
 });
 
 // gulp.task(
@@ -416,6 +430,19 @@ gulp.task(
     )
   )
 );
+gulp.task(
+  "new-build-online",
+  gulp.series(
+    "clean:dist",
+    gulp.series(
+      "new-init-build",
+      "new-css-variable-build-online",
+      "new-minFs-online",
+      "clean:tpl_c"
+    )
+  )
+);
 gulp.task("new-serve", gulp.series("new-build", "connect:dist"));
+gulp.task("new-online", gulp.series("new-build-online", "connect:root"));
 
 // gulp.task("dev", gulp.series("new-html", "css", "js", "connect:index"));

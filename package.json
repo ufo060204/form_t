@@ -9,7 +9,8 @@
     "dev": "gulp dev",
     "newDev": "gulp new-dev",
     "newBuild": "gulp new-build",
-    "newServe": "gulp new-serve"
+    "newServe": "gulp new-serve",
+    "newOnline": "gulp new-online"
   },
   "keywords": [],
   "author": "",
