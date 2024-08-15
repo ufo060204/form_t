@@ -618,8 +618,10 @@ function addCustomValidationMethods() {
     "請至少選擇一個選項"
   );
 }
+
 // 初始化
 document.addEventListener("DOMContentLoaded", () => {
+  // test();
   initializeForm();
   modifyLinkTargets();
   renderStarRatings();

@@ -63,7 +63,6 @@ function createVariableTask(taskName, srcFiles, outputDir) {
     return (
       gulp
         .src(srcFiles)
-        // .pipe(gulp.dest("tpl_c/css/"));
         .pipe(gulp.dest(outputDir))
     );
   });
@@ -120,15 +119,40 @@ function createConnectTask(taskName, baseDir, indexPage = "index.html") {
 //   });
 // }
 
-function createWebpackTask(taskName, srcFiles, outputFile) {
-  return gulp.task(taskName, function () {
-    return gulp
-      .src(srcFiles)
-      .pipe(webpack(webpackConfig))
-      .pipe(gulp.dest(outputFile))
-      .pipe(browserSync.stream());
-  });
-}
+// function createWebpackTask(taskName, srcFiles, outputFile) {
+//   return gulp.task(taskName, function () {
+//     return gulp
+//       .src(srcFiles)
+//       .pipe(webpack(webpackConfig))
+//       .pipe(gulp.dest(outputFile))
+//       .pipe(browserSync.stream());
+//   });
+// }
+
+// function createWebpackTask(
+//   taskName,
+//   srcFiles,
+//   outputFile,
+//   isProduction = false
+// ) {
+//   return gulp.task(taskName, function () {
+//     // 複製 webpackConfig
+//     const config = Object.assign({}, webpackConfig);
+//     // 根據環境設置 mode
+//     config.mode = isProduction ? "production" : "development";
+//     // dev 環境可做其他修改
+//     // if (isProduction) {
+//     //   // 可以在這裡添加其他 dev 環境特定的配置
+//     //   config.optimization = config.optimization || {};
+//     //   config.optimization.minimize = true;
+//     // }
+//     return gulp
+//       .src(srcFiles)
+//       .pipe(webpack(config))
+//       .pipe(gulp.dest(outputFile))
+//       .pipe(browserSync.stream());
+//   });
+// }
 
 function createWebpackTask(
   taskName,
@@ -138,20 +162,45 @@ function createWebpackTask(
 ) {
   return gulp.task(taskName, function () {
     // 複製 webpackConfig
-    const config = Object.assign({}, webpackConfig);
-    // 根據環境設置 mode
-    config.mode = isProduction ? "production" : "development";
-    // dev 環境可做其他修改
+    // const config = Object.assign({}, webpackConfig);
+    // console.log(config);
+
+    // // 根據環境設置 mode
+    // config.mode = isProduction ? "production" : "development";
+
+    // // 配置 optimization
+    // config.optimization = config.optimization || {};
     // if (isProduction) {
-    //   // 可以在這裡添加其他 dev 環境特定的配置
-    //   config.optimization = config.optimization || {};
-    //   config.optimization.minimize = true;
+    //   config.optimization.minimize = true; //
+    //   config.optimization.minimizer = [
+    //     new TerserPlugin({
+    //       terserOptions: {
+    //         // keep_fnames: /^renderStarRatings$/,
+    //         keep_fnames: /^(renderStarRatings|get_api_admodule)$/,
+    //         compress: {
+    //           drop_console: true,
+    //         },
+    //       },
+    //     }),
+    //   ];
     // }
-    return gulp
-      .src(srcFiles)
-      .pipe(webpack(config))
-      .pipe(gulp.dest(outputFile))
-      .pipe(browserSync.stream());
+    // if (!isProduction) {
+    //   config.output = config.output || {};
+    //   config.output.library = "MyLibrary";
+    //   config.output.libraryTarget = "window";
+    //   config.output.libraryExport = "default";
+    // }
+    // // 設置適當的 devtool
+    // config.devtool = isProduction ? "source-map" : "eval-source-map";
+
+    return (
+      gulp
+        .src(srcFiles)
+        // .pipe(webpack(config))
+        .pipe(webpack(webpackConfig))
+        .pipe(gulp.dest(outputFile))
+        .pipe(browserSync.stream())
+    );
   });
 }
 
@@ -189,8 +238,18 @@ createJsTask(
 );
 
 createJsTask(
-  "js",
-  ["tpl/js/all.js"],
+  "new-js-test",
+  [
+    "tpl/js/test.js",
+  ],
+  "test.js"
+);
+
+createJsTask(
+  "new-js-all",
+  [
+    "tpl/js/all.js"
+  ],
   "all.js"
 );
 
@@ -241,7 +300,7 @@ createCssTask(
 );
 
 createCssTask(
-  "css",
+  "new-css-all",
   [
     "tpl/css/new_contact.css",
   ],
@@ -253,23 +312,22 @@ createVariableTask(
   "new-css-variable",
   [
     "tpl/css/variable.css",
-    "tpl/css/variable.dentist.css",
-    "tpl/css/new_dentist/new_dentist_variable.css",
+    // "tpl/css/variable.dentist.css",
+    // "tpl/css/new_dentist/new_dentist_variable.css",
   ],
   "tpl_c/css/"
 );
 
 createVariableTask(
   "new-css-variable-build",
-  ["tpl/css/new_dentist/new_dentist_variable.css"],
+  ["tpl/css/variable.css"],
   "dist/css/"
 );
 
-// createWebpackTask("new-webpack", "tpl_c/js/new_dentist.js", "tpl_c/js/");
 // 開發任務
-createWebpackTask("webpack:dev", "tpl_c/js/new_dentist.js", "tpl_c/js/");
+createWebpackTask("webpack:dev", "tpl_c/js/all.js", "tpl_c/js/", false);
 // 生產任務
-createWebpackTask("webpack:prod", "tpl_c/js/new_dentist.js", "tpl_c/js/", true);
+createWebpackTask("webpack:prod", "tpl_c/js/all.js", "tpl_c/js/", true);
 
 createCleanTask("clean:tpl_c", ["tpl_c/**/*"]);
 createCleanTask("clean:dist", ["dist/**/*"]);
@@ -281,10 +339,10 @@ createConnectTask("connect:dist", "./dist");
 gulp.task("new-watches-dev", function () {
   // gulp.watch("assets/**/js/*.{js, cjs}", gulp.series("new-init"));
   // gulp.watch("assets/**/css/*.css", gulp.series("new-init"));
-  gulp.watch("tpl/*.html", gulp.series("dev"));
-  gulp.watch("tpl/js/**/*.{js, cjs}", gulp.series("dev"));
+  gulp.watch("tpl/*.html", gulp.series("new-init"));
+  gulp.watch("tpl/js/**/*.{js, cjs}", gulp.series("new-init"));
   // gulp.watch("tpl_c/js/**/*.{js, cjs}", gulp.series("dev"));
-  gulp.watch("tpl/css/**/*.css", gulp.series("dev"));
+  gulp.watch("tpl/css/**/*.css", gulp.series("new-init"));
   // gulp.watch(
   //   [
   //     "tpl/css/variable.css",
@@ -327,12 +385,13 @@ gulp.task("new-minFs", function () {
 const commonTasks = [
   "clean:tpl_c",
   "new-html",
-  "new-js",
-  "new-js-luxury",
-  "new-js-newDentist",
-  "new-css",
-  "new-css-luxury",
-  "new-css-newDentist",
+  "new-js-test",
+  "new-js-all",
+  // "new-js-luxury",
+  // "new-js-newDentist",
+  "new-css-all",
+  // "new-css-luxury",
+  // "new-css-newDentist",
   "new-css-variable",
   "new-json",
   "new-php",
@@ -359,4 +418,4 @@ gulp.task(
 );
 gulp.task("new-serve", gulp.series("new-build", "connect:dist"));
 
-gulp.task("dev", gulp.series("new-html", "css", "js", "connect:index"));
+// gulp.task("dev", gulp.series("new-html", "css", "js", "connect:index"));
